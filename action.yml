@@ -1,13 +1,26 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'DVC-action'
+description: 'DVC action for CD4ML'
+
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  github_token: 
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps 
-    description: 'The message to output'
+
+  dvc_repro_file:
+    required: false
+    default: 'Dvcfile'
+
+  dvc_repro_skip:
+    required: false
+    default: false
+
+  skip_ci: 
+    required: false
+    default: '[ci skip]'
+
 runs:
   using: 'node12'
-  main: 'dist/index.js'
+  main: 'index.js'
+
+branding:
+  icon: 'command'  
+  color: 'green'
