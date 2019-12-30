@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "ncc build index.js -o dist",
     "lint": "eslint index.js",
-    "package": "ncc build index.js -o dist",
     "test": "jest"
   },
   "dependencies": {
