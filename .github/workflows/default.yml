@@ -34,7 +34,7 @@ jobs:
     needs: [build]
     steps:
     - uses: actions/checkout@v1
-    
+
     - name: Use Node.js 12
       uses: actions/setup-node@v1
       with:
@@ -51,8 +51,13 @@ jobs:
     - name: npm install
       run: npm ci
 
-    - name: release
-      if: success() && endsWith(github.ref, 'master')
-      run: npx semantic-release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
